@@ -15,7 +15,7 @@
     "vega"
   ],
   "author": "Chris Henrick <chrishenrick@gmail.com> (http://clhenrick.io)",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "dependencies": {
     "@mapd/connector": "https://github.com/mapd/mapd-connector.git",
     "babel-polyfill": "^6.26.0",
