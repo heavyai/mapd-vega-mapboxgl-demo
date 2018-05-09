@@ -1,5 +1,5 @@
-import {debounce} from "./utils"
-import updateVega from "./updateVega"
+import {debounce} from "../common/utils"
+import updateVega from "../common/updateVega"
 
 // set the access token for MapboxGLJS
 var accessToken = 'pk.eyJ1IjoiZW5qYWxvdCIsImEiOiIzOTJmMjBiZmI2NGQ2ZjAzODhiMzhiOGI2MTI1YTk4YSJ9.sIOXXU3TPp5dLg_L3cUxhQ';

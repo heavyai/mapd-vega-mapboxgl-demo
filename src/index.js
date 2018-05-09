@@ -2,10 +2,11 @@ require("./styles.css")
 require('mapbox-gl/dist/mapbox-gl.css')
 require('mapbox-gl/dist/mapboxgl-overrides')
 
-import {serverInfo} from './config'
-import {initMap} from './map'
-import updateVega from './updateVega'
-import {getConnection, getConnectionStatus, saveConnectionObj} from "./mapd-connector"
+import {serverInfo} from './common/config'
+import updateVega from './common/updateVega'
+import {getConnection, getConnectionStatus, saveConnectionObj} from "./common/mapd-connector"
+import {initMap} from './components/map'
+import initSlider from './components/slider'
 
 // render markup for our UI
 document.querySelector("#app").innerHTML = `
@@ -27,6 +28,9 @@ document.querySelector("#app").innerHTML = `
 
 // create the mapboxgl map
 const map = initMap()
+
+// set up the slider
+const slider = initSlider()
 
 // connect to the mapd backend
 getConnection(serverInfo)

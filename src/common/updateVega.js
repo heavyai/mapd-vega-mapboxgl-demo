@@ -1,4 +1,4 @@
-import {updateMap} from "./map"
+import {updateMap} from "../components/map"
 import makeVegaSpec from "./vegaspec"
 import {renderVega} from "./mapd-connector"
 import {conv4326To900913} from "./utils"
