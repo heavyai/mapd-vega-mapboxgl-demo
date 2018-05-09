@@ -8,11 +8,6 @@ mapboxgl.accessToken = accessToken;
 let map = null
 
 export const initMap = () => {
-  // create a div element for mapboxgl to hook into
-  var div = document.createElement("div");
-  div.id = "map"
-  document.querySelector("body").append(div)
-
   // instantiate the map object
   map = new mapboxgl.Map({
     container: "map",
@@ -21,7 +16,7 @@ export const initMap = () => {
     zoom: 2,
     minZoom: 2,
     maxZoom: 16,
-    maxBounds: [[-129, 22], [-66, 54]]
+    maxBounds: [[-75.651855,39.760519], [-74.665833,40.183070]]
   });
 
   // add map navigation controls
