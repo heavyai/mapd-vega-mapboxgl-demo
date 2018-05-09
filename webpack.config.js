@@ -38,6 +38,9 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       title: "MapD Backend Vega Rendering with MapboxGL",
+      inject: false,
+      template: require('html-webpack-template'),
+      appMountId: 'app'
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
