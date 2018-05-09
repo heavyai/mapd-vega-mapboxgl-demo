@@ -13,7 +13,16 @@ const makeVegaSpec = ({
   "data": [
     {
       "name": "pointmap",
-      "sql": `SELECT conv_4326_900913_x(lon) as x, conv_4326_900913_y(lat) as y, issuing_agency as color, parking_violations.rowid FROM parking_violations where conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds} and conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}`
+      "sql": sls`
+        SELECT
+        conv_4326_900913_x(lon) as x,
+        conv_4326_900913_y(lat) as y,
+        issuing_agency as color,
+        parking_violations.rowid
+        FROM parking_violations
+        WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
+        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
+      `
     }
   ],
   "scales": [
@@ -84,7 +93,7 @@ const makeVegaSpec = ({
           "scale": "pointmap_fillColor",
           "field": "color"
         },
-        "size": 1
+        "size": 2
       }
     }
   ]
