@@ -7,6 +7,24 @@ import {initMap} from './map'
 import updateVega from './updateVega'
 import {getConnection, getConnectionStatus, saveConnectionObj} from "./mapd-connector"
 
+// render markup for our UI
+document.querySelector("#app").innerHTML = `
+  <div id="map"></div>
+  <div class='map-overlay top'>
+  <div class='map-overlay-inner'>
+      <h2>Parking Violations in Philadelphia</h2>
+      <label id='month'></label>
+      <input id='slider' type='range' min='0' max='11' step='1' value='0' />
+  </div>
+  <div class='map-overlay-inner'>
+      <div id='legend' class='legend'>
+          <div class='bar'></div>
+          <div>Density  </div>
+      </div>
+  </div>
+  </div>
+`
+
 // create the mapboxgl map
 const map = initMap()
 
