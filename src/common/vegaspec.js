@@ -21,7 +21,8 @@ const makeVegaSpec = ({
         parking_violations.rowid
         FROM parking_violations
         WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
-        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
+        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds} AND
+        issue_datetime between '2015-01-01 00:00:00' and '2017-12-31 00:00:00'
       `
     }
   ],

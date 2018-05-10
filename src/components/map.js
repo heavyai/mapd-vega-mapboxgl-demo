@@ -11,7 +11,7 @@ export const initMap = () => {
   // instantiate the map object
   map = new mapboxgl.Map({
     container: "map",
-    style: 'mapbox://styles/mapbox/light-v9',
+    style: 'mapbox://styles/mapbox/dark-v9',
     center: [-97.5,39.8],
     zoom: 2,
     minZoom: 2,
