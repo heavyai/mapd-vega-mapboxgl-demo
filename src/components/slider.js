@@ -2,15 +2,17 @@ import { scaleTime } from "d3-scale"
 import { timeParse, timeFormat } from "d3-time-format"
 import { timeMonth } from "d3-time"
 
+import dispatcher from "../common/dispatcher"
+
 let slider = null
 
 const parseString = "%B %d %Y"
-const formatString = "%Y-%m-%d %H:%M:%S"
+const formatString = "%Y-%m-01 00:00:00"
 
 const timeParser = timeParse(parseString)
 const timeFormatter = timeFormat(formatString)
 
-const startDate = timeParser("December 31 2011")
+const startDate = timeParser("January 01 2012")
 const endDate = timeParser("December 31 2017")
 
 const numberMonths = timeMonth.count(startDate, endDate)
@@ -23,8 +25,7 @@ function initSlider() {
   slider = document.getElementById('slider')
   slider.setAttribute('max', numberMonths)
   slider.addEventListener('input', (e) => {
-    // TODO: pipe this to the vegaSpec and call updateVega
-    console.log(timeFormatter(timeScale.invert(e.target.value)))
+    dispatcher.call("onChange", null, timeFormatter(timeScale.invert(e.target.value)))
   })
   return slider
 }
