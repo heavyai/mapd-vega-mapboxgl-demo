@@ -5,7 +5,7 @@ import {conv4326To900913} from "./utils"
 import {serverInfo} from './config'
 import {timeFormatter, timeScale} from '../components/slider'
 
-function updateVega(map) {
+function updateVega(map, dateString = "2012-01-01 00:00:00") {
   const container = map.getContainer()
   const height = container.clientHeight
   const width = container.clientWidth
@@ -14,8 +14,6 @@ function updateVega(map) {
   const [xMin, yMin] = conv4326To900913([_sw.lng, _sw.lat])
   const [xMax, yMax] = conv4326To900913([_ne.lng, _ne.lat])
 
-  const startTS = timeFormatter(timeScale.invert(e.target.value))
-
   const vegaSpec = makeVegaSpec({
     width,
     height,
@@ -23,7 +21,7 @@ function updateVega(map) {
     maxXBounds: xMax,
     minYBounds: yMin,
     maxYBounds: yMax,
-    startTS
+    dateString
   })
 
   // render the vega and add it to the map

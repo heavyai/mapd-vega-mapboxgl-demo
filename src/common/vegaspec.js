@@ -7,7 +7,7 @@ const makeVegaSpec = ({
   minYBounds,
   maxYBounds,
   maxXBounds,
-  startTS
+  dateString
 }) => ({
   "width": width,
   "height": height,
@@ -22,8 +22,8 @@ const makeVegaSpec = ({
         parking_violations.rowid
         FROM parking_violations
         WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
-        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds} AND
-        issue_datetime >= '${startTS}'
+        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
+        AND date_trunc(month, issue_datetime) = '${dateString}'
       `
     }
   ],
