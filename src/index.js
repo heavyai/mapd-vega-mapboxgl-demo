@@ -15,7 +15,7 @@ document.querySelector("#app").innerHTML = `
   <img id="logo" height='75px' width='75px' />
   <div class='map-overlay top'>
   <div class='map-overlay-inner'>
-      <!-- <h2>Parking Violations in Philadelphia</h2> -->
+      <h2>Parking Violations by Day: Philadelphia</h2>
       <label id='month'></label>
       <input id='slider' type='range' min='0' max='11' step='1' value='0' />
   </div>

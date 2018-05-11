@@ -25,8 +25,8 @@ img {
 .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;
-    width: 25%;
-    top: 2%;
+    width: 30%;
+    top: 1%;
     left: 8%;
     /* padding: 10px; */
 }

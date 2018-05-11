@@ -23,7 +23,7 @@ const makeVegaSpec = ({
         FROM parking_violations
         WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
         AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
-        AND date_trunc(month, issue_datetime) = '${dateString}'
+        AND date_trunc(day, issue_datetime) = '${dateString}'
       `
     }
   ],
