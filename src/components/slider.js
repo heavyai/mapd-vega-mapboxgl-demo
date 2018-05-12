@@ -12,11 +12,11 @@ const WAIT_TIME_MS = 100
 const parseString = "%B %d %Y"
 const formatString = "%Y-%m-%d 00:00:00"
 
-const timeParser = timeParse(parseString)
-const timeFormatter = timeFormat(formatString)
+export const timeParser = timeParse(parseString)
+export const timeFormatter = timeFormat(formatString)
 
-const startDate = timeParser("January 01 2012")
-const endDate = timeParser("December 31 2017")
+export const startDate = timeParser("January 01 2012")
+export const endDate = timeParser("December 31 2017")
 
 const numberMonths = timeDay.count(startDate, endDate)
 

@@ -39,6 +39,8 @@ const map = initMap()
 
 // set up the slider
 const slider = initSlider()
+// set up date read out
+initDateReadOut()
 
 // connect to the mapd backend
 getConnection(serverInfo)
