@@ -1,6 +1,6 @@
-require('mapbox-gl/dist/mapbox-gl.css')
-require('mapbox-gl/dist/mapboxgl-overrides')
-require("./styles.css")
+import 'mapbox-gl/dist/mapbox-gl.css'
+import 'mapbox-gl/dist/mapboxgl-overrides'
+import './styles.css'
 
 import {serverInfo} from './common/config'
 import updateVega from './common/updateVega'
