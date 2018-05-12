@@ -1,23 +1,23 @@
-require("./styles.css")
 require('mapbox-gl/dist/mapbox-gl.css')
 require('mapbox-gl/dist/mapboxgl-overrides')
+require("./styles.css")
 
 import {serverInfo} from './common/config'
 import updateVega from './common/updateVega'
 import {getConnection, getConnectionStatus, saveConnectionObj} from "./common/mapd-connector"
 import {initMap} from './components/map'
 import initSlider from './components/slider'
+import {initDateReadOut} from './components/dateReadOut'
 import mapdLogo from './images/mapd-logo.png'; //https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d
 
 // render markup for our UI
 document.querySelector("#app").innerHTML = `
 <div class="header">
-  <img id="logo" height='75px' width='75px' />
-  <div class='map-overlay top'>
-  <div class='map-overlay-inner'>
-      <h2>Parking Violations by Day: Philadelphia</h2>
-      <label id='month'></label>
-      <input id='slider' type='range' min='0' max='11' step='1' value='0' />
+  <img class="logo" height='75px' width='75px' />
+  <div class="title-slider">
+    <h2>Parking Violations by Day: Philadelphia</h2>
+    <input class='slider' type='range' min='0' max='11' step='1' value='0' />
+    <label class='date-read-out'></label>
   </div>
   <!-- <div class='map-overlay-inner'>
       <div id='legend' class='legend'>
@@ -27,11 +27,10 @@ document.querySelector("#app").innerHTML = `
   </div> -->
   </div>
 </div>
-  <div id="map"></div>
-
+<div id="map"></div>
 `
 
-var logoImg = document.getElementById('logo');
+var logoImg = document.querySelector('img.logo');
 logoImg.src = mapdLogo;
 
 // create the mapboxgl map

@@ -32,7 +32,7 @@ function handleInputChange(event) {
 
 
 function initSlider() {
-  slider = document.getElementById('slider')
+  slider = document.querySelector('input.slider')
   slider.setAttribute('max', numberMonths)
   slider.addEventListener('input', throttle(handleInputChange, WAIT_TIME_MS))
   return slider

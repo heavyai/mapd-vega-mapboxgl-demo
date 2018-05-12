@@ -13,50 +13,27 @@ body {
   overflow: hidden;
 }
 
-img {
-    padding-left: 15px;
-}
-
 #map {
-  height: 100%;
+  height: calc(100% - 100px);
   width: 100%;
 }
 
-.map-overlay {
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    position: absolute;
-    width: 30%;
-    top: 1%;
-    left: 8%;
-    /* padding: 10px; */
+.header {
+  height: 100px;
+  display: flex;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
-.map-overlay .map-overlay-inner {
-    /* background-color: #fff; */
-    /* box-shadow:0 1px 2px rgba(0, 0, 0, 0.20); */
-    /* border-radius: 3px; */
-    background-color: transparent;
-    padding: 10px;
-    margin-bottom: 10px;
+img.logo {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.map-overlay h2 {
-    line-height: 24px;
-    display: block;
-    margin: 0 0 10px;
+.title-slider {
+  flex-grow: 2
 }
 
-.map-overlay .legend .bar {
-    height: 10px;
-    width: 100%;
-    background: linear-gradient(to right, #FCA107, #7F3121);
-}
-
-.map-overlay input {
-    background-color: transparent;
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    margin: 0;
-    cursor: ew-resize;
+.slider {
+  width: 150px;
+  margin-right: 15px;
 }
