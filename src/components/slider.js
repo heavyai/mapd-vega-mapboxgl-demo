@@ -27,7 +27,7 @@ const timeScale = scaleTime()
 function handleInputChange(event) {
   //for debugging
   console.log(timeFormatter(timeScale.invert(event.target.value)))
-  dispatcher.call("onChange", null, timeFormatter(timeScale.invert(event.target.value)))
+  dispatcher.call("sliderInput", null, timeFormatter(timeScale.invert(event.target.value)))
 }
 
 
