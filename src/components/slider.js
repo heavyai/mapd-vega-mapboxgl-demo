@@ -13,7 +13,7 @@ import {
 let slider = null
 const WAIT_TIME_MS = 100
 
-function handleInputChange(event) {
+function handleInput(event) {
   //for debugging
   console.log(timeFormatter(timeScale.invert(event.target.value)))
   dispatcher.call(
@@ -23,10 +23,23 @@ function handleInputChange(event) {
   )
 }
 
+export function updateSliderPos(value) {
+  slider.value = value.toString()
+  dispatcher.call(
+    "sliderInput",
+    null,
+    timeScale.invert(value)
+  )
+}
+
+export function getValue() {
+  return Number(slider.value)
+}
+
 function initSlider() {
   slider = document.querySelector("input.slider")
   slider.setAttribute("max", numberMonths)
-  slider.addEventListener("input", throttle(handleInputChange, WAIT_TIME_MS))
+  slider.addEventListener("input", throttle(handleInput, WAIT_TIME_MS, { leading: true }))
   return slider
 }
 
