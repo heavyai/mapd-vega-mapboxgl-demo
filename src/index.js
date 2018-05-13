@@ -8,6 +8,8 @@ import {getConnection, getConnectionStatus, saveConnectionObj} from "./common/ma
 import {initMap} from './components/map'
 import initSlider from './components/slider'
 import {initDateReadOut} from './components/dateReadOut'
+import initPlayPause from './components/playPauseControl'
+
 import mapdLogo from './images/mapd-logo.png'; //https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d
 
 
@@ -19,9 +21,12 @@ function main() {
     <div class="header">
       <img class="logo" height='75px' width='75px' />
       <div class="title-slider">
-        <h2>Parking Violations by Day: Philadelphia</h2>
-        <input class='slider' type='range' min='0' max='11' step='1' value='0' />
-        <label class='date-read-out'></label>
+        <h2 class="title">Parking Violations by Day: Philadelphia</h2>
+        <div class="slider-controls">
+          <input class='slider' type='range' min='0' max='11' step='1' value='0' />
+          <button class="play-pause">PLAY</button>
+          <label class='date-read-out'></label>
+        </div>
       </div>
       <!-- <div class='map-overlay-inner'>
           <div id='legend' class='legend'>
@@ -44,6 +49,9 @@ function main() {
 
   // set up date read out
   initDateReadOut()
+
+  // set up the play pause button
+  initPlayPause()
 
   // connect to the mapd backend
   getConnection(serverInfo)
