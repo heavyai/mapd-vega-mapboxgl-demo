@@ -10,52 +10,57 @@ import initSlider from './components/slider'
 import {initDateReadOut} from './components/dateReadOut'
 import mapdLogo from './images/mapd-logo.png'; //https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d
 
-// render markup for our UI
-document.querySelector("#app").innerHTML = `
-<div class="header">
-  <img class="logo" height='75px' width='75px' />
-  <div class="title-slider">
-    <h2>Parking Violations by Day: Philadelphia</h2>
-    <input class='slider' type='range' min='0' max='11' step='1' value='0' />
-    <label class='date-read-out'></label>
-  </div>
-  <!-- <div class='map-overlay-inner'>
-      <div id='legend' class='legend'>
-          <div class='bar'></div>
-          <div>Density  </div>
+
+document.addEventListener("DOMContentLoaded", main)
+
+function main() {
+  // render markup for our UI
+  document.querySelector("#app").innerHTML = `
+    <div class="header">
+      <img class="logo" height='75px' width='75px' />
+      <div class="title-slider">
+        <h2>Parking Violations by Day: Philadelphia</h2>
+        <input class='slider' type='range' min='0' max='11' step='1' value='0' />
+        <label class='date-read-out'></label>
       </div>
-  </div> -->
-  </div>
-</div>
-<div id="map"></div>
-`
+      <!-- <div class='map-overlay-inner'>
+          <div id='legend' class='legend'>
+              <div class='bar'></div>
+              <div>Density  </div>
+          </div>
+      </div> -->
+      </div>
+    </div>
+    <div id="map"></div>`
 
-var logoImg = document.querySelector('img.logo');
-logoImg.src = mapdLogo;
+  const logoImg = document.querySelector('img.logo');
+  logoImg.src = mapdLogo;
 
-// create the mapboxgl map
-const map = initMap()
+  // create the mapboxgl map
+  const map = initMap()
 
-// set up the slider
-const slider = initSlider()
-// set up date read out
-initDateReadOut()
+  // set up the slider
+  const slider = initSlider()
 
-// connect to the mapd backend
-getConnection(serverInfo)
-  .then(con => {
-    // save the connection object so we can use it later
-    saveConnectionObj(con)
-    // check the connection status
-    return getConnectionStatus(con)
-  })
-  .then(status => {
-    if (status && status[0] && status[0].rendering_enabled) {
-      // render the vega and add it to the map
-      updateVega(map)
-    } else {
-      // no BE rendering :(
-      throw Error("backend rendering is not enabled")
-    }
-  })
-  .catch(error => throw error)
+  // set up date read out
+  initDateReadOut()
+
+  // connect to the mapd backend
+  getConnection(serverInfo)
+    .then(con => {
+      // save the connection object so we can use it later
+      saveConnectionObj(con)
+      // check the connection status
+      return getConnectionStatus(con)
+    })
+    .then(status => {
+      if (status && status[0] && status[0].rendering_enabled) {
+        // render the vega and add it to the map
+        updateVega(map)
+      } else {
+        // no BE rendering :(
+        throw Error("backend rendering is not enabled")
+      }
+    })
+    .catch(error => throw error)
+}
