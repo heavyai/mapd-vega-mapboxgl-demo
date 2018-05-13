@@ -28,11 +28,15 @@ function play () {
 
   timerInstance = interval(elapsed => {
     //console.log(elapsed)
-    if (!isPlaying || sliderValue > numberMonths) {
+    if (!isPlaying) {
       stop()
+    } else if (sliderValue > numberMonths) {
+      sliderValue = 0
+      updateSliderPos(sliderValue)
+    } else {
+      sliderValue = sliderValue + 1
+      updateSliderPos(sliderValue)
     }
-    sliderValue = sliderValue + 1
-    updateSliderPos(sliderValue)
   }, delay)
 }
 
