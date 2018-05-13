@@ -8,7 +8,6 @@ module.exports = {
   entry: ["babel-polyfill", "./src/index.js"],
   devtool: "inline-source-map",
   devServer: {
-    hot: true,
     contentBase: path.join(__dirname, "dist"),
     watchContentBase: true
   },
