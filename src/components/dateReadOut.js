@@ -1,11 +1,11 @@
 import dispatcher from "../common/dispatcher"
-import { startDate, timeFormatter } from "./slider"
+import { startDate, timeFormatterDR } from "../common/date-time-utils"
 
 let dateReadOut = null
 
 export function initDateReadOut() {
   dateReadOut = document.querySelector(".date-read-out")
-  dateReadOut.innerHTML = timeFormatter(startDate)
+  dateReadOut.innerHTML = timeFormatterDR(startDate)
 }
 
 export function updateDateReadOut(value) {
