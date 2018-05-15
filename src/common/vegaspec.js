@@ -13,25 +13,61 @@ const makeVegaSpec = ({
   "height": height,
   "data": [
     {
-      "name": "pointmap",
+      "name": "heatmap_querygeoheat",
       "sql": sls`
-        SELECT
-        conv_4326_900913_x(lon) as x,
-        conv_4326_900913_y(lat) as y,
-        issuing_agency as color,
-        parking_violations.rowid
-        FROM parking_violations
-        WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
-        AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
-        AND date_trunc(month, issue_datetime) = '${dateString}'
-      `
+                SELECT
+                reg_hex_horiz_pixel_bin_x(conv_4326_900913_x(longitude),${minXBounds},${maxXBounds},conv_4326_900913_y(latitude),${minYBounds},${maxYBounds},2.995983935742972,3.4594642635779986,0,0,${width},${height}) as x,
+                reg_hex_horiz_pixel_bin_y(conv_4326_900913_x(longitude),${minXBounds},${maxXBounds},conv_4326_900913_y(latitude),${minYBounds},${maxYBounds},2.995983935742972,3.4594642635779986,0,0,${width},${height}) as y,
+                max(anomflow) as color
+                FROM channel_anomflow_assim
+                WHERE ((conv_4326_900913_x(longitude) >= ${minXBounds} AND conv_4326_900913_x(longitude) <= ${maxXBounds}) AND
+                       (conv_4326_900913_y(latitude) >= ${minYBounds} AND conv_4326_900913_y(latitude) <= ${maxYBounds})) AND ptime = '${dateString}'
+                GROUP BY x, y
+                `
+    },
+    {
+      "name": "heatmap_querygeoheat_stats",
+      "source": "heatmap_querygeoheat",
+      "transform": [
+        {
+          "type": "aggregate",
+          "fields": [
+            "color",
+            "color",
+            "color",
+            "color"
+          ],
+          "ops": [
+            "min",
+            "max",
+            "avg",
+            "stddev"
+          ],
+          "as": [
+            "minimum",
+            "maximum",
+            "mean",
+            "deviation"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "max(minimum, mean-2*deviation)",
+          "as": "mincolor"
+        },
+        {
+          "type": "formula",
+          "expr": "min(maximum, mean+2*deviation)",
+          "as": "maxcolor"
+        }
+      ]
     }
   ],
   "scales": [
     {
       "name": "x",
       "type": "linear",
-      "domain": [ minXBounds, maxXBounds],
+      "domain": [ minXBounds, maxXBounds ],
       "range": "width"
     },
     {
@@ -41,61 +77,44 @@ const makeVegaSpec = ({
       "range": "height"
     },
     {
-      "name": "pointmap_fillColor",
-      "type": "ordinal",
-      "domain": [
-        "PPA",
-        "POLICE",
-        "CENTER C",
-        "SEPTA",
-        "PENN",
-        "TEMPLE",
-        "HOUSING",
-        "PRISONS",
-        "FAIRMNT",
-        "UNASSIGN",
-        "Other"
-      ],
+      "name": "heat_colorgeoheat",
+      "type": "quantize",
+      "domain": {
+        "data": "heatmap_querygeoheat_stats",
+        "fields": [
+          "mincolor",
+          "maxcolor"
+        ]
+      },
       "range": [
-        "rgba(234,85,69,0.85)",
-        "rgba(189,207,50,0.85)",
-        "rgba(179,61,198,0.85)",
-        "rgba(239,155,32,0.85)",
-        "rgba(135,188,69,0.85)",
-        "rgba(244,106,155,0.85)",
-        "rgba(172,229,199,0.85)",
-        "rgba(237,225,91,0.85)",
-        "rgba(131,109,197,0.85)",
-        "rgba(134,216,127,0.85)",
-        "rgba(39,174,239,0.85)"
+        "rgba(178, 144, 111, 0.9)",
+        "#c7eae5",
+        "#214365"
       ],
-      "default": "rgba(39,174,239,0.85)",
-      "nullValue": "rgba(202,202,202,0.85)"
+      "default": "rgba(13,8,135,0.5)",
+      "nullValue": "rgba(13,8,135,0.5)"
     }
-  ],
-  "projections": [
-
   ],
   "marks": [
     {
-      "type": "points",
+      "type": "symbol",
       "from": {
-        "data": "pointmap"
+        "data": "heatmap_querygeoheat"
       },
       "properties": {
-        "x": {
-          "scale": "x",
+        "shape": "hexagon-horiz",
+        "xc": {
           "field": "x"
         },
-        "y": {
-          "scale": "y",
+        "yc": {
           "field": "y"
         },
+        "width": 2.995983935742972,
+        "height": 3.4594642635779986,
         "fillColor": {
-          "scale": "pointmap_fillColor",
+          "scale": "heat_colorgeoheat",
           "field": "color"
-        },
-        "size": 2
+        }
       }
     }
   ]

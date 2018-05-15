@@ -5,7 +5,7 @@ import {conv4326To900913} from "./utils"
 import {serverInfo} from './config'
 import {timeFormatter, timeScale} from '../components/slider'
 
-function updateVega(map, dateString = "2012-01-01 00:00:00") {
+function updateVega(map, dateString = "2018-01-01") {
   const container = map.getContainer()
   const height = container.clientHeight
   const width = container.clientWidth

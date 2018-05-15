@@ -1,5 +1,5 @@
 export const serverInfo = {
-  host: '13.90.129.165',
+  host: '52.168.111.218',
   port: 9092,
   database: 'mapd',
   username: 'mapd',

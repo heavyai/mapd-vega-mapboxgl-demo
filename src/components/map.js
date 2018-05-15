@@ -11,12 +11,12 @@ export const initMap = () => {
   // instantiate the map object
   map = new mapboxgl.Map({
     container: "map",
-    style: 'mapbox://styles/mapbox/dark-v9',
-    center: [-97.5,39.8],
+    style: 'mapbox://styles/mapbox/light-v9',
+    // center: [-97.5,39.8],
     zoom: 2,
     minZoom: 2,
     maxZoom: 16,
-    maxBounds: [[-75.651855,39.760519], [-74.665833,40.183070]]
+    maxBounds: [[-136,20], [-61,54]]
   });
 
   // add map navigation controls
