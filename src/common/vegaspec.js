@@ -21,7 +21,7 @@ const makeVegaSpec = ({
                 max(anomflow) as color
                 FROM channel_anomflow_retrospect
                 WHERE ((conv_4326_900913_x(longitude) >= ${minXBounds} AND conv_4326_900913_x(longitude) <= ${maxXBounds}) AND
-                       (conv_4326_900913_y(latitude) >= ${minYBounds} AND conv_4326_900913_y(latitude) <= ${maxYBounds})) AND ptime = '${dateString}'
+                       (conv_4326_900913_y(latitude) >= ${minYBounds} AND conv_4326_900913_y(latitude) <= ${maxYBounds})) AND vtime = '${dateString}'
                 GROUP BY x, y
                 `
     },
