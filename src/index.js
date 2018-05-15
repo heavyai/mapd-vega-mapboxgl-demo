@@ -21,7 +21,7 @@ function main() {
     <div class="header">
       <img class="logo" height='75px' width='75px' />
       <div class="title-slider">
-        <h2 class="title">National Water Model: Retrospective Flow Anomaly (channel_anomflow_retrospect)</h2>
+        <h2 class="title">National Water Model: Retrospective Flow Anomaly</h2>
         <div class="slider-controls">
           <input class='slider' type='range' min='0' max='11' step='1' value='0' />
           <button class="play-pause">PLAY</button>
