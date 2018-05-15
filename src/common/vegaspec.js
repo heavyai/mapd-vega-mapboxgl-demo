@@ -19,7 +19,7 @@ const makeVegaSpec = ({
                 reg_hex_horiz_pixel_bin_x(conv_4326_900913_x(longitude),${minXBounds},${maxXBounds},conv_4326_900913_y(latitude),${minYBounds},${maxYBounds},2.995983935742972,3.4594642635779986,0,0,${width},${height}) as x,
                 reg_hex_horiz_pixel_bin_y(conv_4326_900913_x(longitude),${minXBounds},${maxXBounds},conv_4326_900913_y(latitude),${minYBounds},${maxYBounds},2.995983935742972,3.4594642635779986,0,0,${width},${height}) as y,
                 max(anomflow) as color
-                FROM channel_anomflow_assim
+                FROM channel_anomflow_prospect
                 WHERE ((conv_4326_900913_x(longitude) >= ${minXBounds} AND conv_4326_900913_x(longitude) <= ${maxXBounds}) AND
                        (conv_4326_900913_y(latitude) >= ${minYBounds} AND conv_4326_900913_y(latitude) <= ${maxYBounds})) AND ptime = '${dateString}'
                 GROUP BY x, y
