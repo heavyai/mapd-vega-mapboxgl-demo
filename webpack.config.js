@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const NameAllModulesPlugin = require('name-all-modules-plugin');
 const webpack = require("webpack");
 
 module.exports = {
@@ -39,6 +40,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "MapD Backend Vega Rendering with MapboxGL",
     }),
+    new NameAllModulesPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
