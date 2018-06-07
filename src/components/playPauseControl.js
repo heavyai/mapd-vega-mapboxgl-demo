@@ -8,7 +8,7 @@ let isPlaying = false
 let sliderValue = 0
 
 const ONE_SEC = 1000
-const totalTime = 10 * ONE_SEC
+const totalTime = 10 * 10 * ONE_SEC
 const delay = totalTime / numberMonths
 
 function stop () {

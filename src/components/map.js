@@ -2,6 +2,7 @@ import {debounce} from "../common/utils"
 import dispatcher from "../common/dispatcher"
 
 // set the access token for MapboxGLJS
+// https://www.mapbox.com/mapbox-gl-js/api/
 var accessToken = 'pk.eyJ1IjoiZW5qYWxvdCIsImEiOiIzOTJmMjBiZmI2NGQ2ZjAzODhiMzhiOGI2MTI1YTk4YSJ9.sIOXXU3TPp5dLg_L3cUxhQ';
 mapboxgl.accessToken = accessToken;
 

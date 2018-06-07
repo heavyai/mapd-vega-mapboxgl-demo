@@ -10,7 +10,7 @@ import initSlider from './components/slider'
 import {initDateReadOut} from './components/dateReadOut'
 import initPlayPause from './components/playPauseControl'
 
-import mapdLogo from './images/mapd-logo.png'; //https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d
+import mapdLogo from './images/mapd-logo.png';
 
 
 document.addEventListener("DOMContentLoaded", main)
@@ -28,12 +28,6 @@ function main() {
           <label class='date-read-out'></label>
         </div>
       </div>
-      <!-- <div class='map-overlay-inner'>
-          <div id='legend' class='legend'>
-              <div class='bar'></div>
-              <div>Density  </div>
-          </div>
-      </div> -->
       </div>
     </div>
     <div id="map"></div>`
