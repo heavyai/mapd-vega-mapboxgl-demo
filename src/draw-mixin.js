@@ -54,7 +54,7 @@ function createUnlikelyStmtFromShape(shape, xAttr, yAttr, useLonLat) {
 }
 
 /* istanbul ignore next */
-export function rasterDrawMixin(chart) {
+export function rasterDrawMixin(chart, map) {
   let drawEngine = null
   let buttonController = null
   let currXRange = null
@@ -79,12 +79,149 @@ export function rasterDrawMixin(chart) {
     dashPattern: [8, 2]
   }
 
-  function applyHardCodedFilter() {
-    
+  function applyFilter() {
+    const NUM_SIDES = 3
+    const useLonLat = typeof chart.useLonLat === "function" && chart.useLonLat()
+    const shapes = drawEngine.sortedShapes
+    const LatLonCircle = getLatLonCircleClass()
+    const filterObj = {
+      shapeFilters: [],
+      px: [],
+      py: []}
+    const px = "fec_contributions_oct.lon"
+    const py = "fec_contributions_oct.lat"
+    filterObj.px.push(px)
+    filterObj.py.push(py)
+    shapes.forEach(shape => {
+      if (shape instanceof LatLonCircle) {
+
+        const pos = shape.getWorldPosition()
+        // convert from mercator to lat-lon
+        LatLonUtils.conv900913To4326(pos, pos)
+        const meters = shape.radius * 1000
+        filterObj.shapeFilters.push(
+          `DISTANCE_IN_METERS(${pos[0]}, ${
+            pos[1]
+            }, ${px}, ${py}) < ${meters}`
+        )
+      } else if (shape instanceof MapdDraw.Circle) {
+        const radsqr = Math.pow(shape.radius, 2)
+        const mat = MapdDraw.Mat2d.clone(shape.globalXform)
+        MapdDraw.Mat2d.invert(mat, mat)
+        filterObj.shapeFilters.push(
+          `${createUnlikelyStmtFromShape(
+            shape,
+            px,
+            py,
+            useLonLat
+          )} AND (POWER(${mat[0]} * CAST(${px} AS FLOAT) + ${
+            mat[2]
+            } * CAST(${py} AS FLOAT) + ${mat[4]}, 2.0) + POWER(${
+            mat[1]
+            } * CAST(${px} AS FLOAT) + ${
+            mat[3]
+            } * CAST(${py} AS FLOAT) + ${
+            mat[5]
+            }, 2.0)) / ${radsqr} <= 1.0`
+        )
+      } else if (shape instanceof MapdDraw.Poly) {
+        const p0 = [0, 0]
+        const p1 = [0, 0]
+        const p2 = [0, 0]
+        const earcutverts = []
+        const verts = shape.vertsRef
+        const xform = shape.globalXform
+        verts.forEach(vert => {
+          MapdDraw.Point2d.transformMat2d(p0, vert, xform)
+          if (useLonLat) {
+            LatLonUtils.conv900913To4326(p0, p0)
+          }
+          earcutverts.push(p0[0], p0[1])
+        })
+
+        const triangles = earcut(earcutverts)
+        const triangleTests = []
+        let idx = 0
+        for (let j = 0; j < triangles.length; j = j + NUM_SIDES) {
+          idx = triangles[j] * 2
+          MapdDraw.Point2d.set(
+            p0,
+            earcutverts[idx],
+            earcutverts[idx + 1]
+          )
+
+          idx = triangles[j + 1] * 2
+          MapdDraw.Point2d.set(
+            p1,
+            earcutverts[idx],
+            earcutverts[idx + 1]
+          )
+
+          idx = triangles[j + 2] * 2
+          MapdDraw.Point2d.set(
+            p2,
+            earcutverts[idx],
+            earcutverts[idx + 1]
+          )
+
+          triangleTests.push(
+            writePointInTriangleSqlTest(p0, p1, p2, px, py, !useLonLat)
+          )
+        }
+
+        if (triangleTests.length) {
+          filterObj.shapeFilters.push(
+            `${createUnlikelyStmtFromShape(
+              shape,
+              px,
+              py,
+              useLonLat
+            )} AND (${triangleTests.join(" OR ")})`
+          )
+        }
+      }
+    })
+
+    // filterObj.forEach(filterObj => {
+      if (
+        filterObj.px && filterObj.py &&
+        filterObj.px.length &&
+        filterObj.py.length &&
+        filterObj.shapeFilters.length
+      ) {
+        const shapeFilterStmt = filterObj.shapeFilters.join(" OR ")
+        const filterStmt = filterObj.px
+          .map((e, i) => ({ px: e, py: filterObj.py[i] }))
+          .reduce(
+            (acc, e) =>
+              acc.some(e1 => e1.px === e.px && e1.py === e.py)
+                ? acc
+                : [...acc, e],
+            []
+          )
+          .map(
+            (e, i) =>
+              `(${e.px} IS NOT NULL AND ${
+                e.py
+                } IS NOT NULL AND (${shapeFilterStmt}))`
+          )
+          .join(" AND ")
+
+        updateVega(map, "AND "+filterStmt)
+        filterObj.px = []
+        filterObj.py = []
+        filterObj.shapeFilters = []
+      }
+    // })
+
+    const shapesJSON = drawEngine.getShapesAsJSON()
+    console.log('shapes ', shapesJSON)
+    // updateFilter(shapes)
   }
+
   function drawEventHandler() {
-    applyHardCodedFilter()
-    updateVega(map)
+    applyFilter()
+    // updateVega(map)
   }
 
   const debounceRedraw = chart.debounce(() => {
@@ -96,7 +233,6 @@ export function rasterDrawMixin(chart) {
   }
 
   chart.addFilterShape = shape => {
-    debugger
     shape.on(
       ["changed:geom", "changed:xform", "changed:visibility"],
       updateDrawFromGeom

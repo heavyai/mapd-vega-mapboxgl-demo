@@ -20,7 +20,8 @@
     "@mapd/connector": "https://github.com/mapd/mapd-connector.git",
     "@mapd/mapd-draw": "git://github.com/omnisci/mapd-draw.git#fa59fbf68ded25619b5f71b3ee6a73cea9f8d149",
     "babel-polyfill": "^6.26.0",
-    "mapbox-gl": "https://github.com/mapd/mapbox-gl-js/tarball/9c04de6949fe498c8c79f5c0627dfd6d6321f307"
+    "mapbox-gl": "https://github.com/mapd/mapbox-gl-js/tarball/9c04de6949fe498c8c79f5c0627dfd6d6321f307",
+    "simplify-js": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",

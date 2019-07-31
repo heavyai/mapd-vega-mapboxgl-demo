@@ -116,7 +116,7 @@ export const initMap = () => {
     return renderBounds
   }
 
-  rasterDrawMixin(chart)
+  rasterDrawMixin(chart, map)
   chart.addDrawControl()
   function update() {
     updateVega(map)

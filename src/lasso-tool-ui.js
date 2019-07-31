@@ -2,7 +2,7 @@
 
 // import * as LatLonUtils from "../../utils/utils-latlon"
 import * as MapdDraw from "@mapd/mapd-draw/dist/mapd-draw"
-// import simplify from "simplify-js"
+import simplify from "simplify-js"
 // import { logger } from "../../utils/logger"
 import updateVega from "./updateVega"
 
@@ -627,7 +627,7 @@ class PolylineShapeHandler extends ShapeHandler {
       }
 
       if (!shapeBuilt) {
-        this.enableBasemapDebounceFunc()
+        // this.enableBasemapDebounceFunc()
         this.canvas.focus()
         this.activeShape = null
         this.activeIdx = -1

@@ -6,7 +6,8 @@ const makeVegaSpec = ({
   minXBounds,
   minYBounds,
   maxYBounds,
-  maxXBounds
+  maxXBounds,
+  filter
 }) => ({
   width,
   height,
@@ -22,6 +23,7 @@ const makeVegaSpec = ({
         FROM fec_contributions_oct
         WHERE conv_4326_900913_x(lon) between ${minXBounds} and ${maxXBounds}
         AND conv_4326_900913_y(lat) between ${minYBounds} and ${maxYBounds}
+        ${filter}
         LIMIT 2000000`
     }
   ],
