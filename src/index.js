@@ -3,7 +3,7 @@ require('mapbox-gl/dist/mapbox-gl.css')
 require('mapbox-gl/dist/mapboxgl-overrides')
 
 import {serverInfo} from './config'
-import {initMap} from './map'
+import {initMap} from './mapboxMap'
 import updateVega from './updateVega'
 import {getConnection, getConnectionStatus, saveConnectionObj} from "./mapd-connector"
 
