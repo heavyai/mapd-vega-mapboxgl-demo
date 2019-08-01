@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f501f14b-cb31-4f3b-b363-7926aadc22ba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/draw-mixin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/draw-mixin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lasso-tool-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lasso-tool-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mapboxMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mapboxMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/updateVega.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/updateVega.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vegaspec.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/vegaspec.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -54,11 +48,20 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/updateVega.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+                <state relative-caret-position="150">
+                  <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="60">
+                  <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
@@ -76,11 +79,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/draw-mixin.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="362">
-                  <caret line="95" column="42" lean-forward="true" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
+                <state relative-caret-position="1515">
+                  <caret line="101" column="35" selection-start-line="101" selection-start-column="35" selection-end-line="101" selection-end-column="35" />
                   <folding>
                     <element signature="e#56#140#0" expanded="true" />
                   </folding>
@@ -88,10 +91,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/lasso-tool-ui.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-9507">
+                <state relative-caret-position="7245">
                   <caret line="483" column="19" lean-forward="true" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
                   <folding>
                     <element signature="e#73#131#0" expanded="true" />
@@ -134,6 +137,7 @@
       <find>updateVe</find>
       <find>updateVega</find>
       <find>conv4326To900913</find>
+      <find>deb</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,6 +154,7 @@
         <option value="$PROJECT_DIR$/src/lasso-tool-ui.js" />
         <option value="$PROJECT_DIR$/src/draw-mixin.js" />
         <option value="$PROJECT_DIR$/src/updateVega.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -214,12 +219,12 @@
       <option name="presentableId" value="Default" />
       <updated>1564178517166</updated>
       <workItem from="1564178518652" duration="2159000" />
-      <workItem from="1564430290319" duration="19103000" />
+      <workItem from="1564430290319" duration="19654000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21262000" />
+    <option name="totallyTimeSpent" value="21813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
@@ -302,16 +307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lasso-tool-ui.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9507">
-          <caret line="483" column="19" lean-forward="true" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
-          <folding>
-            <element signature="e#73#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -329,16 +324,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/draw-mixin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="95" column="42" lean-forward="true" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
-          <folding>
-            <element signature="e#56#140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/vegaspec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -346,10 +331,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/draw-mixin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1515">
+          <caret line="101" column="35" selection-start-line="101" selection-start-column="35" selection-end-line="101" selection-end-column="35" />
+          <folding>
+            <element signature="e#56#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lasso-tool-ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7245">
+          <caret line="483" column="19" lean-forward="true" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
+          <folding>
+            <element signature="e#73#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/updateVega.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+        <state relative-caret-position="150">
+          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
         </state>
       </provider>
     </entry>
