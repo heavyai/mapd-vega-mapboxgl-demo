@@ -207,7 +207,7 @@ export function rasterDrawMixin(chart, map) {
           )
           .join(" AND ")
 
-        updateVega(map, "AND "+filterStmt)
+        updateVega(map, filterStmt)
         filterObj.px = []
         filterObj.py = []
         filterObj.shapeFilters = []
@@ -215,7 +215,7 @@ export function rasterDrawMixin(chart, map) {
     // })
 
     const shapesJSON = drawEngine.getShapesAsJSON()
-    console.log('shapes ', shapesJSON)
+    console.log('filter shape object ', shapesJSON)
     // updateFilter(shapes)
   }
 

@@ -1129,7 +1129,7 @@ export default class LassoButtonGroupController {
   }
 
   _initControls(defaultStyle, defaultSelectStyle) {
-    console.log('initControlls')
+
     let margins = null
     if (typeof this._chart.margins === "function") {
       margins = this._chart.margins()

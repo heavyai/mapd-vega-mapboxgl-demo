@@ -1,7 +1,7 @@
 import {debounce, conv4326To900913} from "./utils"
 import updateVega from "./updateVega"
 import {rasterDrawMixin, addDrawControl} from "./draw-mixin";
-
+import {saveConnectionObj, getSavedConnection} from "./mapd-connector"
 // set the access token for MapboxGLJS
 var accessToken = 'pk.eyJ1IjoiZW5qYWxvdCIsImEiOiIzOTJmMjBiZmI2NGQ2ZjAzODhiMzhiOGI2MTI1YTk4YSJ9.sIOXXU3TPp5dLg_L3cUxhQ';
 mapboxgl.accessToken = accessToken;
@@ -17,7 +17,8 @@ export const initMap = () => {
   let _interactionsEnabled = true
   let _mapInitted = false
   let hasAppliedInitialBounds = false
-
+  let _clientClickX = null
+  let _clientClickY = null
 
   document.querySelector("body").append(chart)
 
@@ -121,7 +122,24 @@ export const initMap = () => {
   function update() {
     updateVega(map)
   }
+  map.on("mousedown", event => {
+    _clientClickX = event.point.x
+    _clientClickY = event.point.y
+  })
 
+  map.on("mouseup", event => {
+    // Make sure that the user is clicking to filter, and not dragging or panning the map
+    if (
+      _clientClickX === event.point.x &&
+      _clientClickY === event.point.y
+    ) {
+      console.log('clientX and clientY', _clientClickX, _clientClickY)
+      getClosestResult(event.point, result => {
+        const data = result.row_set[0]
+        console.log('result data', data)
+      })
+    }
+  })
   map.on('move', debounce(update, 100))
 
   return map
@@ -186,4 +204,34 @@ export const updateMap = (vegaImage) => {
       coordinates: imageBounds
     });
   }
+}
+
+function getClosestResult(point, callback) {
+  const height = 700
+  const pixelRatio = 1
+  const pixel = new TPixel({
+    x: Math.round(point.x * pixelRatio),
+    y: Math.round((height - point.y) * pixelRatio)
+  })
+
+  if (!point) {
+    return
+  }
+
+  const layerObj = {}
+  layerObj['pointmap'] = ["amount", "conv_4326_900913_x(lon) AS x", "conv_4326_900913_y(lat) AS y"]
+
+  getSavedConnection()
+    .getResultRowForPixelAsync(
+      1,
+      pixel,
+      layerObj,
+      Math.ceil(2 * pixelRatio)
+    )
+    .then(results => callback(results[0]))
+    .catch(error => {
+      throw new Error(
+        `getResultRowForPixel failed with message: ${error.message}`
+      )
+    })
 }

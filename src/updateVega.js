@@ -23,7 +23,7 @@ function updateVega(map, filterExpr) {
     maxYBounds: yMax,
     filter
   })
-console.log('vegaSpec ', vegaSpec.data[0].sql)
+console.log('filterExpr ', filterExpr)
   // render the vega and add it to the map
   renderVega(vegaSpec)
     .then(result => {
